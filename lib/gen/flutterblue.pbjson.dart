@@ -43,6 +43,27 @@ const BluetoothState_State$json = const {
 
 /// Descriptor for `BluetoothState`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List bluetoothStateDescriptor = $convert.base64Decode('Cg5CbHVldG9vdGhTdGF0ZRIrCgVzdGF0ZRgBIAEoDjIVLkJsdWV0b290aFN0YXRlLlN0YXRlUgVzdGF0ZSJpCgVTdGF0ZRILCgdVTktOT1dOEAASDwoLVU5BVkFJTEFCTEUQARIQCgxVTkFVVEhPUklaRUQQAhIOCgpUVVJOSU5HX09OEAMSBgoCT04QBBIPCgtUVVJOSU5HX09GRhAFEgcKA09GRhAG');
+@$core.Deprecated('Use bluetoothDeviceBondStateDescriptor instead')
+const BluetoothDeviceBondState$json = const {
+  '1': 'BluetoothDeviceBondState',
+  '2': const [
+    const {'1': 'state', '3': 1, '4': 1, '5': 14, '6': '.BluetoothDeviceBondState.State', '10': 'state'},
+  ],
+  '4': const [BluetoothDeviceBondState_State$json],
+};
+
+@$core.Deprecated('Use bluetoothDeviceBondStateDescriptor instead')
+const BluetoothDeviceBondState_State$json = const {
+  '1': 'State',
+  '2': const [
+    const {'1': 'BOND_NONE', '2': 0},
+    const {'1': 'BOND_BONDING', '2': 1},
+    const {'1': 'BOND_BONDED', '2': 2},
+  ],
+};
+
+/// Descriptor for `BluetoothDeviceBondState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List bluetoothDeviceBondStateDescriptor = $convert.base64Decode('ChhCbHVldG9vdGhEZXZpY2VCb25kU3RhdGUSNQoFc3RhdGUYASABKA4yHy5CbHVldG9vdGhEZXZpY2VCb25kU3RhdGUuU3RhdGVSBXN0YXRlIjkKBVN0YXRlEg0KCUJPTkRfTk9ORRAAEhAKDEJPTkRfQk9ORElORxABEg8KC0JPTkRfQk9OREVEEAI=');
 @$core.Deprecated('Use advertisementDataDescriptor instead')
 const AdvertisementData$json = const {
   '1': 'AdvertisementData',

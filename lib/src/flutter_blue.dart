@@ -7,6 +7,8 @@ part of flutter_blue;
 class FlutterBlue {
   final MethodChannel _channel = const MethodChannel('$NAMESPACE/methods');
   final EventChannel _stateChannel = const EventChannel('$NAMESPACE/state');
+  final EventChannel _bondStateChannel =
+      const EventChannel('$NAMESPACE/bondState');
   final StreamController<MethodCall> _methodStreamController =
       new StreamController.broadcast(); // ignore: close_sinks
   Stream<MethodCall> get _methodStream => _methodStreamController
@@ -62,6 +64,13 @@ class FlutterBlue {
         .receiveBroadcastStream()
         .map((buffer) => new protos.BluetoothState.fromBuffer(buffer))
         .map((s) => BluetoothState.values[s.state.value]);
+  }
+
+  Stream<BluetoothDeviceBondState> get bondState async* {
+    yield* _bondStateChannel
+        .receiveBroadcastStream()
+        .map((buffer) => new protos.BluetoothDeviceBondState.fromBuffer(buffer))
+        .map((s) => BluetoothDeviceBondState.values[s.state.value]);
   }
 
   /// Retrieve a list of connected devices

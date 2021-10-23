@@ -70,6 +70,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
     private static final String NAMESPACE = "plugins.pauldemarco.com/flutter_blue";
 
     private EventChannel stateChannel;
+    private EventChannel bondStateChannel;
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
 
@@ -154,6 +155,8 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
             channel.setMethodCallHandler(this);
             stateChannel = new EventChannel(messenger, NAMESPACE + "/state");
             stateChannel.setStreamHandler(stateHandler);
+            bondStateChannel = new EventChannel(messenger, NAMESPACE + "/bondState");
+            bondStateChannel.setStreamHandler(bondStateHandler);
             mBluetoothManager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
             mBluetoothAdapter = mBluetoothManager.getAdapter();
             if (registrar != null) {
@@ -175,6 +178,8 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
         channel = null;
         stateChannel.setStreamHandler(null);
         stateChannel = null;
+        bondStateChannel.setStreamHandler(null);
+        bondStateChannel = null;
         mBluetoothAdapter = null;
         mBluetoothManager = null;
         application = null;
@@ -750,6 +755,46 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
         public void onListen(Object o, EventChannel.EventSink eventSink) {
             sink = eventSink;
             IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+            context.registerReceiver(mReceiver, filter);
+        }
+
+        @Override
+        public void onCancel(Object o) {
+            sink = null;
+            context.unregisterReceiver(mReceiver);
+        }
+    };
+
+    private final StreamHandler bondStateHandler = new StreamHandler(){
+        private EventSink sink;
+
+        private final BroadcastReceiver mReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                final String action = intent.getAction();
+
+                if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+                    BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    int bondSate = bluetoothDevice.getBondState();
+                    switch (bondSate) {
+                        case BluetoothDevice.BOND_NONE:
+                            sink.success(Protos.BluetoothDeviceBondState.newBuilder().setState(Protos.BluetoothDeviceBondState.State.BOND_NONE).build().toByteArray());
+                            break;
+                        case BluetoothDevice.BOND_BONDING:
+                            sink.success(Protos.BluetoothDeviceBondState.newBuilder().setState(Protos.BluetoothDeviceBondState.State.BOND_BONDING).build().toByteArray());
+                            break;
+                        case BluetoothDevice.BOND_BONDED:
+                            sink.success(Protos.BluetoothDeviceBondState.newBuilder().setState(Protos.BluetoothDeviceBondState.State.BOND_BONDED).build().toByteArray());
+                            break;
+                    }
+                }
+            }
+        };
+
+        @Override
+        public void onListen(Object o, EventChannel.EventSink eventSink) {
+            sink = eventSink;
+            IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
             context.registerReceiver(mReceiver, filter);
         }
 

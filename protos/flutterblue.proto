@@ -29,6 +29,16 @@ message BluetoothState {
   State state = 1;
 }
 
+message BluetoothDeviceBondState {
+  enum State{
+    BOND_NONE = 0;
+    BOND_BONDING = 1;
+    BOND_BONDED = 2;
+  }
+
+  State state = 1;
+}
+
 message AdvertisementData {
   string local_name = 1;
   Int32Value tx_power_level = 2;

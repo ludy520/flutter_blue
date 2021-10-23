@@ -34,6 +34,23 @@ class BluetoothState_State extends $pb.ProtobufEnum {
   const BluetoothState_State._($core.int v, $core.String n) : super(v, n);
 }
 
+class BluetoothDeviceBondState_State extends $pb.ProtobufEnum {
+  static const BluetoothDeviceBondState_State BOND_NONE = BluetoothDeviceBondState_State._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'BOND_NONE');
+  static const BluetoothDeviceBondState_State BOND_BONDING = BluetoothDeviceBondState_State._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'BOND_BONDING');
+  static const BluetoothDeviceBondState_State BOND_BONDED = BluetoothDeviceBondState_State._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'BOND_BONDED');
+
+  static const $core.List<BluetoothDeviceBondState_State> values = <BluetoothDeviceBondState_State> [
+    BOND_NONE,
+    BOND_BONDING,
+    BOND_BONDED,
+  ];
+
+  static final $core.Map<$core.int, BluetoothDeviceBondState_State> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static BluetoothDeviceBondState_State? valueOf($core.int value) => _byValue[value];
+
+  const BluetoothDeviceBondState_State._($core.int v, $core.String n) : super(v, n);
+}
+
 class BluetoothDevice_Type extends $pb.ProtobufEnum {
   static const BluetoothDevice_Type UNKNOWN = BluetoothDevice_Type._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'UNKNOWN');
   static const BluetoothDevice_Type CLASSIC = BluetoothDevice_Type._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'CLASSIC');

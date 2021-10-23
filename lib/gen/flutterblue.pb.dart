@@ -107,6 +107,53 @@ class BluetoothState extends $pb.GeneratedMessage {
   void clearState() => clearField(1);
 }
 
+class BluetoothDeviceBondState extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'BluetoothDeviceBondState', createEmptyInstance: create)
+    ..e<BluetoothDeviceBondState_State>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: BluetoothDeviceBondState_State.BOND_NONE, valueOf: BluetoothDeviceBondState_State.valueOf, enumValues: BluetoothDeviceBondState_State.values)
+    ..hasRequiredFields = false
+  ;
+
+  BluetoothDeviceBondState._() : super();
+  factory BluetoothDeviceBondState({
+    BluetoothDeviceBondState_State? state,
+  }) {
+    final _result = create();
+    if (state != null) {
+      _result.state = state;
+    }
+    return _result;
+  }
+  factory BluetoothDeviceBondState.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory BluetoothDeviceBondState.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  BluetoothDeviceBondState clone() => BluetoothDeviceBondState()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BluetoothDeviceBondState copyWith(void Function(BluetoothDeviceBondState) updates) => super.copyWith((message) => updates(message as BluetoothDeviceBondState)) as BluetoothDeviceBondState; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static BluetoothDeviceBondState create() => BluetoothDeviceBondState._();
+  BluetoothDeviceBondState createEmptyInstance() => create();
+  static $pb.PbList<BluetoothDeviceBondState> createRepeated() => $pb.PbList<BluetoothDeviceBondState>();
+  @$core.pragma('dart2js:noInline')
+  static BluetoothDeviceBondState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BluetoothDeviceBondState>(create);
+  static BluetoothDeviceBondState? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  BluetoothDeviceBondState_State get state => $_getN(0);
+  @$pb.TagNumber(1)
+  set state(BluetoothDeviceBondState_State v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasState() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearState() => clearField(1);
+}
+
 class AdvertisementData extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AdvertisementData', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'localName')

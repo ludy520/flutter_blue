@@ -161,3 +161,9 @@ class BluetoothDevice {
 enum BluetoothDeviceType { unknown, classic, le, dual }
 
 enum BluetoothDeviceState { disconnected, connecting, connected, disconnecting }
+
+enum BluetoothDeviceBondState {
+  bond_none,
+  bond_bonding,
+  bond_bonded,
+}
