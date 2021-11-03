@@ -108,7 +108,11 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
     NSArray *periphs = [self->_centralManager retrieveConnectedPeripheralsWithServices:@[[CBUUID UUIDWithString:@"1800"]]];
     NSLog(@"getConnectedDevices periphs size: %lu", [periphs count]);
     result([self toFlutterData:[self toConnectedDeviceResponseProto:periphs]]);
-  } else if([@"connect" isEqualToString:call.method]) {
+  }else if ([@"getKnownDevices" isEqualToString:call.method]){
+    NSArray<CBPeripheral*> *periphs = [_centralManager retrievePeripheralsWithIdentifiers:@[]];
+    NSLog(@"getKnownDevices periphs size: %lu", [periphs count]);
+    result([self toFlutterData:[self toConnectedDeviceResponseProto:periphs]]);
+  }else if([@"connect" isEqualToString:call.method]) {
     FlutterStandardTypedData *data = [call arguments];
     ProtosConnectRequest *request = [[ProtosConnectRequest alloc] initWithData:[data data] error:nil];
     NSString *remoteId = [request remoteId];
@@ -265,6 +269,11 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
 
 - (CBPeripheral*)findPeripheral:(NSString*)remoteId {
   NSArray<CBPeripheral*> *peripherals = [_centralManager retrievePeripheralsWithIdentifiers:@[[[NSUUID alloc] initWithUUIDString:remoteId]]];
+  NSLog(@"getKnownDevices  size: %lu", [peripherals count]);
+  if(peripherals == nil || peripherals.count == 0) {
+    peripherals = [_centralManager retrieveConnectedPeripheralsWithServices:@[[CBUUID UUIDWithString:@"1800"]]];
+    NSLog(@"getConnectedDevices periphs size: %lu", [peripherals count]);
+  }
   CBPeripheral *peripheral;
   for(CBPeripheral *p in peripherals) {
     if([[p.identifier UUIDString] isEqualToString:remoteId]) {
