@@ -301,7 +301,21 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
                 result.success(null);
                 break;
             }
-            
+
+            case "removeBond":
+            {
+                String deviceId = (String)call.arguments;
+                BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(deviceId);
+                try {
+                    Boolean flag = ClsUtils.removeBond(device.getClass(),device);
+                    result.success(flag);
+                } catch (Exception e) {
+                    Log.d(TAG,"remove bond device exception");
+                    result.success(false);
+                }
+                break;
+            }
+
             case "connect":
             {
                 byte[] data = call.arguments();

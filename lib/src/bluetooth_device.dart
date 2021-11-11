@@ -50,6 +50,11 @@ class BluetoothDevice {
     return FlutterBlue.instance._channel.invokeMethod('pair', id.toString());
   }
 
+  Future<bool?> removeBond() {
+    return FlutterBlue.instance._channel
+        .invokeMethod<bool>('removeBond', id.toString());
+  }
+
   /// Cancels connection to the Bluetooth Device
   Future disconnect() =>
       FlutterBlue.instance._channel.invokeMethod('disconnect', id.toString());
