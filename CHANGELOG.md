@@ -1,3 +1,6 @@
+## 0.8.7
+* add bluetoothDevice constructor from id
+
 ## 0.8.0
 * Migrate the plugin to null safety.
 
